@@ -12,7 +12,6 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
                 x.AddConsumers(typeof(Program).Assembly);
-                // x.AddConsumer<PingConsumer>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host("localhost", 9000, "/", h =>

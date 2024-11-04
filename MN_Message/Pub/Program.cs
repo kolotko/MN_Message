@@ -1,5 +1,7 @@
 ﻿using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pub;
 
 var host = CreateHostBuilder(args).Build();
 host.Run();
@@ -11,8 +13,6 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
             services.AddMassTransit(x =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
-                x.AddConsumers(typeof(Program).Assembly);
-                // x.AddConsumer<PingConsumer>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host("localhost", 9000, "/", h =>
@@ -20,8 +20,7 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
                         h.Username("user");
                         h.Password("password");
                     });
-                    
-                    cfg.ConfigureEndpoints(context);
                 });
             });
+            services.AddHostedService<NotificationPublisher>();
         });
