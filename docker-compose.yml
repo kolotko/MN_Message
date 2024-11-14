@@ -12,6 +12,13 @@ services:
       RABBITMQ_DEFAULT_PASS: password
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "9002:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
 
 volumes:
   rabbitmq_data:
