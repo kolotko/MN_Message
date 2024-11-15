@@ -18,4 +18,8 @@
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Migrations\20241114175922_InitialMigration2.cs" />
+    </ItemGroup>
+
 </Project>
